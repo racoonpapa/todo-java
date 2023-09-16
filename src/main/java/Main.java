@@ -17,7 +17,7 @@ public class Main {
             elapsedFrom = (endTime - startTime) * 0.000000001;
 
             if(list != null) {
-                System.out.println(list);
+                list.Print();
 
                 startTime = System.nanoTime();
                 String newJson = list.toJson();

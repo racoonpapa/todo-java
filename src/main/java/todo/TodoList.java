@@ -9,7 +9,6 @@ import com.google.gson.reflect.TypeToken;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 public class TodoList {
     private final HashMap<String, TodoItem> items = new HashMap<>();
@@ -35,8 +34,7 @@ public class TodoList {
         return gson.toJson(items.values(), new TypeToken<Collection<TodoItem>>() {}.getType());
     }
 
-    @Override
-    public String toString() {
-        return items.values().stream().map(TodoItem::toString).collect(Collectors.joining("\n"));
+    public void Print() {
+        for (TodoItem item : items.values()) System.out.println(item);
     }
 }
