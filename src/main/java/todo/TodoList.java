@@ -2,10 +2,10 @@ package todo;
 
 import adapters.LocalDateAdapter;
 import adapters.PriorityAdapter;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
@@ -21,23 +21,19 @@ public class TodoList {
 
     public static TodoList fromJson(String json) {
         try {
-            TodoList list = new TodoList();
+            TodoList newList = new TodoList();
+            Collection<TodoItem> list = gson.fromJson(json, new TypeToken<Collection<TodoItem>>(){}.getType());
 
-            JsonArray jsonArray = JsonParser.parseString(json).getAsJsonArray();
-            for(JsonElement element: jsonArray) {
-                TodoItem item = gson.fromJson(element, TodoItem.class);
-                list.items.put(item.itemId, item);
-            }
+            for(TodoItem item: list) newList.items.put(item.itemId, item);
 
-            return list;
+            return newList;
         } catch(Exception e) {
             return null;
         }
     }
 
     public String toJson() {
-        Type todoListType = new TypeToken<Collection<TodoItem>>() {}.getType();
-        return gson.toJson(items.values(), todoListType);
+        return gson.toJson(items.values(), new TypeToken<Collection<TodoItem>>() {}.getType());
     }
 
     @Override
