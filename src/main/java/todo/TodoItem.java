@@ -26,11 +26,7 @@ public class TodoItem {
         }
 
         public static Priority from(int value) {
-            for(Priority priority : Priority.values()) {
-                if(priority.value == value) {
-                    return priority;
-                }
-            }
+            for(Priority priority : Priority.values()) if(priority.value == value) return priority;
             throw new IllegalArgumentException("invalid integer value");
         }
     }
@@ -47,31 +43,17 @@ public class TodoItem {
     public TodoItem(String content) {
         this.content = content;
     }
-    public TodoItem withDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-        return this;
-    }
-    public TodoItem withPriority(Priority priority) {
-        this.priority = priority;
-        return this;
-    }
-    public TodoItem setContent(String content) {
-        this.content = content;
-        return this;
-    }
+    public TodoItem withDueDate(LocalDate dueDate) { this.dueDate = dueDate; return this; }
+    public TodoItem withPriority(Priority priority) { this.priority = priority; return this; }
+    public TodoItem setContent(String content) { this.content = content; return this; }
 
     @Override
     public String toString() {
-        String ret = String.format("[%c] %s", done?'x':' ', content);
+        StringBuilder ret = new StringBuilder(String.format("[%c] %s", done?'x':' ', content));
 
-        if(priority != Priority.None) {
-            ret = ret + String.format(" [%s]", priority);
-        }
+        if(priority != Priority.None) ret.append(String.format(" [%s]", priority));
+        if(dueDate != null) ret.append(String.format(" (%s)", dueDate));
 
-        if(dueDate != null) {
-            ret = ret + String.format(" (%s)", dueDate);
-        }
-
-        return ret;
+        return ret.toString();
     }
 }
