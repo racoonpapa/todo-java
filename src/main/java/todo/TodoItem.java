@@ -6,23 +6,16 @@ import java.time.LocalDate;
 
 public class TodoItem {
     public enum Priority {
-        None(0, "None"), Low(1, "Low"), Medium(2, "Medium"), High(3, "High");
+        None(0), Low(1), Medium(2), High(3);
 
-        private final String text;
         private final int value;
 
-        Priority(int value, String text) {
-            this.text = text;
+        Priority(int value) {
             this.value = value;
         }
 
         public int getValue() {
             return value;
-        }
-
-        @Override
-        public String toString() {
-            return text;
         }
 
         public static Priority from(int value) {
