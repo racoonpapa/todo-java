@@ -22,7 +22,7 @@ public class TodoList {
         try {
             TodoList newList = new TodoList();
             Collection<TodoItem> list = gson.fromJson(json, new TypeToken<Collection<TodoItem>>(){}.getType());
-            for(TodoItem item: list) newList.items.put(item.itemId, item);
+            for(TodoItem item: list) newList.items.put(item.id, item);
 
             return newList;
         } catch(Exception e) {

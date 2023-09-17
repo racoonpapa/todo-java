@@ -24,8 +24,7 @@ public class TodoItem {
         }
     }
 
-    @SerializedName("id")
-    public String itemId;
+    public String id;
     public boolean done;
     public String content;
 
@@ -42,11 +41,11 @@ public class TodoItem {
 
     @Override
     public String toString() {
-        StringBuilder ret = new StringBuilder(String.format("[%c] %s", done?'x':' ', content));
+        StringBuilder builder = new StringBuilder(String.format("[%c] %s", done?'x':' ', content));
 
-        if(priority != Priority.None) ret.append(String.format(" [%s]", priority));
-        if(dueDate != null) ret.append(String.format(" (%s)", dueDate));
+        if(priority != Priority.None) builder.append(String.format(" [%s]", priority));
+        if(dueDate != null) builder.append(String.format(" (%s)", dueDate));
 
-        return ret.toString();
+        return builder.toString();
     }
 }
